@@ -1,9 +1,3 @@
-export interface Song {
-  title: string;
-  artist: string;
-  album: string | null; // Album might not always be identified
-  albumArtUrl: string; // Keep this, can use a placeholder if not identified
-}
 
 export enum Mood {
   COOL = 'COOL',
@@ -35,7 +29,7 @@ export interface SliderConfig {
   onChange: (value: number) => void;
 }
 
-export type AudioSource = 'none' | 'spotify' | 'microphone';
+export type AudioSource = 'none' | 'microphone';
 
 // For microphone hook
 export interface MicrophoneData {
@@ -44,5 +38,3 @@ export interface MicrophoneData {
   error: string | null;
   permissionStatus: 'prompt' | 'granted' | 'denied';
 }
-
-export type SongIdentificationStatus = 'idle' | 'identifying' | 'identified' | 'failed' | 'stopped';

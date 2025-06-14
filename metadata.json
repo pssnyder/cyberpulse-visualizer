@@ -1,5 +1,8 @@
 {
   "name": "CyberPulse Music Visualizer",
   "description": "A futuristic music visualizer that reacts to mock audio data or live microphone input, allowing users to customize the visual experience through punch, vibe, and mood controls.",
-  "requestFramePermissions": ["microphone"]
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "prompt": ""
 }
