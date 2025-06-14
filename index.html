@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CyberPulse Visualizer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            margin: 0; 
+            background-color: #0D0221; /* Default to cyber-bg */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* A more modern sans-serif stack */
+            overflow: hidden; /* Prevent scrollbars from visualizer itself */
+        }
+        #root {
+            width: 100vw;
+            height: 100vh;
+        }
+        /* Custom scrollbar for consistency if ever needed, though overflow is hidden */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1130; /* Darker variant of cyber-bg */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #F706CF; /* cyber-secondary */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2DE2E6; /* cyber-primary */
+        }
+
+        /* For UI auto-hide transitions */
+        .ui-element {
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+        .ui-hidden {
+            opacity: 0;
+            pointer-events: none; /* Important for not intercepting mouse events when hidden */
+        }
+        .header-hidden {
+            transform: translateY(-100%);
+        }
+        .footer-hidden {
+            transform: translateY(100%);
+        }
+        .now-playing-hidden {
+            transform: translate(-50%, -50%) scale(0.9);
+        }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'cyber-primary': '#2DE2E6',   // Bright Teal
+              'cyber-secondary': '#F706CF', // Vibrant Pink
+              'cyber-accent': '#9013FE',    // Deep Purple
+              'cyber-bg': '#0D0221',        // Very Dark Blue/Purple
+              'cyber-bg-light': 'rgba(13, 2, 33, 0.5)' // semi-transparent bg for elements
+            },
+            animation: {
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'fadeIn': 'fadeIn 1s ease-out forwards',
+              'fadeOut': 'fadeOut 1s ease-out forwards',
+            },
+            keyframes: {
+              pulse: {
+                '0%, 100%': { opacity: 1, textShadow: '0 0 5px #2DE2E6, 0 0 10px #2DE2E6' },
+                '50%': { opacity: 0.7, textShadow: '0 0 10px #2DE2E6, 0 0 20px #2DE2E6, 0 0 30px #F706CF' },
+              },
+              fadeIn: {
+                '0%': { opacity: '0', transform: 'translate(-50%, -60%) scale(0.95)' },
+                '100%': { opacity: '1', transform: 'translate(-50%, -50%) scale(1)' },
+              },
+              fadeOut: {
+                '0%': { opacity: '1', transform: 'translate(-50%, -50%) scale(1)' },
+                '100%': { opacity: '0', transform: 'translate(-50%, -40%) scale(0.95)', visibility: 'hidden' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "@google/genai": "https://esm.sh/@google/genai"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <svg width="0" height="0" style={{ position: 'absolute' }}>
+      <defs>
+        <symbol id="icon-fullscreen-enter" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+        </symbol>
+        <symbol id="icon-fullscreen-exit" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>
+        </symbol>
+      </defs>
+    </svg>
+    <!-- The bundled script will be automatically injected in a real build setup -->
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
